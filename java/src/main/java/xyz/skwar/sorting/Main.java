@@ -25,6 +25,7 @@ public class Main {
     ArrayList<Integer> copyForQuickSort = new ArrayList<>(randomIntList);
     ArrayList<Integer> copyForBuiltInSort = new ArrayList<>(randomIntList);
     ArrayList<Integer> copyForRadixSort = new ArrayList<>(randomIntList);
+    ArrayList<Integer> copyForGnomeSort = new ArrayList<>(randomIntList);
 
     // Init Sorting classes with the respective copies
     BubbleSort bubbleSort = new BubbleSort(copyForBubbleSort);
@@ -33,6 +34,7 @@ public class Main {
     QuickSort quickSort = new QuickSort(copyForQuickSort);
     Runnable builtInSort = () -> copyForBuiltInSort.sort(null);
     RadixSort radixSort = new RadixSort(copyForRadixSort);
+    GnomeSort gnomeSort = new GnomeSort(copyForGnomeSort);
 
     // Time Sorting functions
     long bubbleSortTime = measureTime(bubbleSort::bubbleSort);
@@ -41,6 +43,7 @@ public class Main {
     long quickSortTime = measureTime(quickSort::quickSort);
     long builtInSortTime = measureTime(builtInSort);
     long radixSortTime = measureTime(radixSort::radixSort);
+    long gnomeSortTime = measureTime(gnomeSort::gnomeSort);
 
     // Print time duration for each sorter
     logger.info("Time taken by BubbleSort: {} ms", bubbleSortTime);
@@ -49,6 +52,7 @@ public class Main {
     logger.info("Time taken by QuickSort: {} ms", quickSortTime);
     logger.info("Time taken by BuiltInSort: {} ms", builtInSortTime);
     logger.info("Time taken by RadixSort: {} ms", radixSortTime);
+    logger.info("Time taken by GnomeSort: {} ms", gnomeSortTime);
   }
 
   private static long measureTime(Runnable action) {
