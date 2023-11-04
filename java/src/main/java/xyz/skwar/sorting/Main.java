@@ -77,6 +77,7 @@ public class Main {
 
   private static Long timeSort(Runnable sortTask) {
     long startTime = System.currentTimeMillis();
+    sortTask.run();
     long endTime = System.currentTimeMillis();
     return endTime - startTime;
   }
