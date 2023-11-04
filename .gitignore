@@ -1,5 +1,5 @@
-# Created by https://www.toptal.com/developers/gitignore/api/java,go,pydev,python,haskell,goland+all
-# Edit at https://www.toptal.com/developers/gitignore?templates=java,go,pydev,python,haskell,goland+all
+# Created by https://www.toptal.com/developers/gitignore/api/go,java,pydev,python,haskell,goland+all,maven
+# Edit at https://www.toptal.com/developers/gitignore?templates=go,java,pydev,python,haskell,goland+all,maven
 
 ### Go ###
 # If you prefer the allow list template instead of the deny list, see community template:
@@ -163,6 +163,25 @@ cabal.project.local~
 hs_err_pid*
 replay_pid*
 
+### Maven ###
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+# https://github.com/takari/maven-wrapper#usage-without-binary-jar
+.mvn/wrapper/maven-wrapper.jar
+
+# Eclipse m2e generated files
+# Eclipse Core
+.project
+# JDT-specific (Eclipse Java Development Tools)
+.classpath
+
 ### pydev ###
 .pydevproject
 
@@ -240,7 +259,6 @@ docs/_build/
 
 # PyBuilder
 .pybuilder/
-target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
@@ -336,5 +354,5 @@ poetry.toml
 # LSP config files
 pyrightconfig.json
 
-# End of https://www.toptal.com/developers/gitignore/api/java,go,pydev,python,haskell,goland+all
+# End of https://www.toptal.com/developers/gitignore/api/go,java,pydev,python,haskell,goland+all,maven
 
