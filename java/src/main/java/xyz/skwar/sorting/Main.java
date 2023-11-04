@@ -18,23 +18,33 @@ public class Main {
       randomIntList.add(rand.nextInt(listLength * 5));
     }
 
-    // Init Sorting classes
-    BubbleSort bubbleSort = new BubbleSort(randomIntList);
-    ShellSort shellSort = new ShellSort(randomIntList);
-    HeapSort heapSort = new HeapSort(randomIntList);
-    QuickSort quickSort = new QuickSort(randomIntList);
+    // Make copies of the original unsorted list for each sort
+    ArrayList<Integer> copyForBubbleSort = new ArrayList<>(randomIntList);
+    ArrayList<Integer> copyForShellSort = new ArrayList<>(randomIntList);
+    ArrayList<Integer> copyForHeapSort = new ArrayList<>(randomIntList);
+    ArrayList<Integer> copyForQuickSort = new ArrayList<>(randomIntList);
+    ArrayList<Integer> copyForBuiltInSort = new ArrayList<>(randomIntList);
+
+    // Init Sorting classes with the respective copies
+    BubbleSort bubbleSort = new BubbleSort(copyForBubbleSort);
+    ShellSort shellSort = new ShellSort(copyForShellSort);
+    HeapSort heapSort = new HeapSort(copyForHeapSort);
+    QuickSort quickSort = new QuickSort(copyForQuickSort);
+    Runnable builtInSort = () -> copyForBuiltInSort.sort(null);
 
     // Time Sorting functions
     long bubbleSortTime = measureTime(bubbleSort::bubbleSort);
     long shellSortTime = measureTime(shellSort::shellSort);
     long heapSortTime = measureTime(heapSort::heapSort);
     long quickSortTime = measureTime(quickSort::quickSort);
+    long builtInSortTime = measureTime(builtInSort);
 
     // Print time duration for each sorter
     logger.info("Time taken by BubbleSort: {} ms", bubbleSortTime);
     logger.info("Time taken by ShellSort: {} ms", shellSortTime);
     logger.info("Time taken by HeapSort: {} ms", heapSortTime);
     logger.info("Time taken by QuickSort: {} ms", quickSortTime);
+    logger.info("Time taken by BuiltInSort: {} ms", builtInSortTime);
   }
 
   private static long measureTime(Runnable action) {
