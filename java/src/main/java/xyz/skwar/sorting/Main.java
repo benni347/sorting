@@ -54,6 +54,10 @@ public class Main {
     Future<Long> builtInSortFuture = executor.submit(() -> timeSort(builtInSort));
     Future<Long> radixSortFuture = executor.submit(() -> timeSort(radixSort::radixSort));
     Future<Long> gnomeSortFuture = executor.submit(() -> timeSort(gnomeSort::gnomeSort));
+    // Future<Long> bogoSortFuture = executor.submit(() ->
+    // timeSort(bogoSort::bogoSort));
+    // Future<Long> bozoSortFuture = executor.submit(() ->
+    // timeSort(bozoSort::bozoSort));
     Future<Long> spaghettiSortFuture =
         executor.submit(() -> timeSort(spaghettiSort::spaghettiSort));
 
@@ -65,13 +69,14 @@ public class Main {
     printSortTime("BuiltInSort", builtInSortFuture);
     printSortTime("RadixSort", radixSortFuture);
     printSortTime("GnomeSort", gnomeSortFuture);
+    // printSortTime("BogoSort", bogoSortFuture);
+    // printSortTime("BozoSort", bozoSortFuture);
     printSortTime("SpaghettiSort", spaghettiSortFuture);
     executor.shutdown();
   }
 
   private static Long timeSort(Runnable sortTask) {
     long startTime = System.currentTimeMillis();
-    sortTask.run(); // Execute the sorting task
     long endTime = System.currentTimeMillis();
     return endTime - startTime;
   }
