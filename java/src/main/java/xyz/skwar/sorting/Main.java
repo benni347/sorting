@@ -22,16 +22,19 @@ public class Main {
     BubbleSort bubbleSort = new BubbleSort(randomIntList);
     ShellSort shellSort = new ShellSort(randomIntList);
     HeapSort heapSort = new HeapSort(randomIntList);
+    QuickSort quickSort = new QuickSort(randomIntList);
 
     // Time Sorting functions
     long bubbleSortTime = measureTime(bubbleSort::bubbleSort);
     long shellSortTime = measureTime(shellSort::shellSort);
     long heapSortTime = measureTime(heapSort::heapSort);
+    long quickSortTime = measureTime(quickSort::quickSort);
 
     // Print time duration for each sorter
     logger.info("Time taken by BubbleSort: {} ms", bubbleSortTime);
     logger.info("Time taken by ShellSort: {} ms", shellSortTime);
     logger.info("Time taken by HeapSort: {} ms", heapSortTime);
+    logger.info("Time taken by QuickSort: {} ms", quickSortTime);
   }
 
   private static long measureTime(Runnable action) {
