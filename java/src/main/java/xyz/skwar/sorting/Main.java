@@ -2,6 +2,7 @@ package xyz.skwar.sorting;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,6 +10,9 @@ public class Main {
   private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
   public static void main(String[] args) {
+    // At the beginning of the main method
+    ExecutorService executor = Executors.newFixedThreadPool(6);
+
     // Create an ArrayList and populate it with random values
     ArrayList<Integer> randomIntList = new ArrayList<>();
     Random rand = new Random();
@@ -42,35 +46,42 @@ public class Main {
     // BozoSort bozoSort = new BozoSort(copyForBozoSort);
     SpaghettiSort spaghettiSort = new SpaghettiSort(copyForSpaghettiSort);
 
-    // Time Sorting functions
-    long bubbleSortTime = measureTime(bubbleSort::bubbleSort);
-    long shellSortTime = measureTime(shellSort::shellSort);
-    long heapSortTime = measureTime(heapSort::heapSort);
-    long quickSortTime = measureTime(quickSort::quickSort);
-    long builtInSortTime = measureTime(builtInSort);
-    long radixSortTime = measureTime(radixSort::radixSort);
-    long gnomeSortTime = measureTime(gnomeSort::gnomeSort);
-    // long bogoSortTime = measureTime(bogoSort::bogoSort);
-    // long bozoSortTime = measureTime(bozoSort::bozoSort);
-    long spaghettiSortTime = measureTime(spaghettiSort::spaghettiSort);
+    // Submit them with immediate timing
+    Future<Long> bubbleSortFuture = executor.submit(() -> timeSort(bubbleSort::bubbleSort));
+    Future<Long> shellSortFuture = executor.submit(() -> timeSort(shellSort::shellSort));
+    Future<Long> heapSortFuture = executor.submit(() -> timeSort(heapSort::heapSort));
+    Future<Long> quickSortFuture = executor.submit(() -> timeSort(quickSort::quickSort));
+    Future<Long> builtInSortFuture = executor.submit(() -> timeSort(builtInSort));
+    Future<Long> radixSortFuture = executor.submit(() -> timeSort(radixSort::radixSort));
+    Future<Long> gnomeSortFuture = executor.submit(() -> timeSort(gnomeSort::gnomeSort));
+    Future<Long> spaghettiSortFuture =
+        executor.submit(() -> timeSort(spaghettiSort::spaghettiSort));
 
-    // Print time duration for each sorter
-    logger.info("Time taken by BubbleSort: {} ms", bubbleSortTime);
-    logger.info("Time taken by ShellSort: {} ms", shellSortTime);
-    logger.info("Time taken by HeapSort: {} ms", heapSortTime);
-    logger.info("Time taken by QuickSort: {} ms", quickSortTime);
-    logger.info("Time taken by BuiltInSort: {} ms", builtInSortTime);
-    logger.info("Time taken by RadixSort: {} ms", radixSortTime);
-    logger.info("Time taken by GnomeSort: {} ms", gnomeSortTime);
-    // logger.info("Time taken by BogoSort: {} ms", bogoSortTime);
-    // logger.info("Time taken by BozoSort: {} ms", bozoSortTime);
-    logger.info("Time taken by SpaghettiSort: {} ms", spaghettiSortTime);
+    // Wait for all futures to complete and print the timing
+    printSortTime("BubbleSort", bubbleSortFuture);
+    printSortTime("ShellSort", shellSortFuture);
+    printSortTime("HeapSort", heapSortFuture);
+    printSortTime("QuickSort", quickSortFuture);
+    printSortTime("BuiltInSort", builtInSortFuture);
+    printSortTime("RadixSort", radixSortFuture);
+    printSortTime("GnomeSort", gnomeSortFuture);
+    printSortTime("SpaghettiSort", spaghettiSortFuture);
+    executor.shutdown();
   }
 
-  private static long measureTime(Runnable action) {
-    long startTimeBubble = System.currentTimeMillis();
-    action.run();
-    long endTimeBubble = System.currentTimeMillis();
-    return endTimeBubble - startTimeBubble;
+  private static Long timeSort(Runnable sortTask) {
+    long startTime = System.currentTimeMillis();
+    sortTask.run(); // Execute the sorting task
+    long endTime = System.currentTimeMillis();
+    return endTime - startTime;
+  }
+
+  private static void printSortTime(String sortName, Future<Long> future) {
+    try {
+      Long sortTime = future.get(); // This waits for the task to complete
+      logger.info("Time taken by {}: {} ms", sortName, sortTime);
+    } catch (InterruptedException | ExecutionException e) {
+      logger.error("There was a problem with the sorting task", e);
+    }
   }
 }
