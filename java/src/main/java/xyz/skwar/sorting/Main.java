@@ -12,19 +12,26 @@ public class Main {
     // Create an ArrayList and populate it with random values
     ArrayList<Integer> randomIntList = new ArrayList<>();
     Random rand = new Random();
-    int listLength = 1000;
+    int listLength = 10000;
 
     for (int i = 0; i < listLength; i++) {
       randomIntList.add(rand.nextInt(listLength * 5));
     }
 
+    // Init Sorting classes
     BubbleSort bubbleSort = new BubbleSort(randomIntList);
+    ShellSort shellSort = new ShellSort(randomIntList);
+    HeapSort heapSort = new HeapSort(randomIntList);
 
-    // Time bubbleSort
+    // Time Sorting functions
     long bubbleSortTime = measureTime(bubbleSort::bubbleSort);
+    long shellSortTime = measureTime(shellSort::shellSort);
+    long heapSortTime = measureTime(heapSort::heapSort);
 
     // Print time duration for each sorter
     logger.info("Time taken by BubbleSort: {} ms", bubbleSortTime);
+    logger.info("Time taken by ShellSort: {} ms", shellSortTime);
+    logger.info("Time taken by HeapSort: {} ms", heapSortTime);
   }
 
   private static long measureTime(Runnable action) {
