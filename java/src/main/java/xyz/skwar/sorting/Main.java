@@ -28,6 +28,7 @@ public class Main {
     ArrayList<Integer> copyForGnomeSort = new ArrayList<>(randomIntList);
     // ArrayList<Integer> copyForBogoSort = new ArrayList<>(randomIntList);
     // ArrayList<Integer> copyForBozoSort = new ArrayList<>(randomIntList);
+    ArrayList<Integer> copyForSpaghettiSort = new ArrayList<>(randomIntList);
 
     // Init Sorting classes with the respective copies
     BubbleSort bubbleSort = new BubbleSort(copyForBubbleSort);
@@ -39,6 +40,7 @@ public class Main {
     GnomeSort gnomeSort = new GnomeSort(copyForGnomeSort);
     // BogoSort bogoSort = new BogoSort(copyForBogoSort);
     // BozoSort bozoSort = new BozoSort(copyForBozoSort);
+    SpaghettiSort spaghettiSort = new SpaghettiSort(copyForSpaghettiSort);
 
     // Time Sorting functions
     long bubbleSortTime = measureTime(bubbleSort::bubbleSort);
@@ -50,6 +52,7 @@ public class Main {
     long gnomeSortTime = measureTime(gnomeSort::gnomeSort);
     // long bogoSortTime = measureTime(bogoSort::bogoSort);
     // long bozoSortTime = measureTime(bozoSort::bozoSort);
+    long spaghettiSortTime = measureTime(spaghettiSort::spaghettiSort);
 
     // Print time duration for each sorter
     logger.info("Time taken by BubbleSort: {} ms", bubbleSortTime);
@@ -61,6 +64,7 @@ public class Main {
     logger.info("Time taken by GnomeSort: {} ms", gnomeSortTime);
     // logger.info("Time taken by BogoSort: {} ms", bogoSortTime);
     // logger.info("Time taken by BozoSort: {} ms", bozoSortTime);
+    logger.info("Time taken by SpaghettiSort: {} ms", spaghettiSortTime);
   }
 
   private static long measureTime(Runnable action) {
