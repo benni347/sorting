@@ -7,6 +7,7 @@ import (
 	"runtime"
 	"time"
 
+	"github.com/benni347/sorting/go/pkg/bogo"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -77,5 +78,7 @@ func RunAndLogPerformance() {
 	}
 
 	startTime := time.Now()
+	bogo.Bogo(randomIntList)
 	timeDuration := time.Since(startTime)
+	logExecution(timeDuration, "bogo")
 }
