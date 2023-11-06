@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/benni347/sorting/go/pkg/utils"
+
 	log "github.com/sirupsen/logrus"
 	cli "github.com/urfave/cli/v2"
 	"github.com/urfave/cli/v2/altsrc"
@@ -65,4 +66,5 @@ func initLogging() {
 
 func runApp() {
 	logger.WithFields(log.Fields{}).Debug("Programm Arguments")
+	utils.RunAndLogPerformance()
 }

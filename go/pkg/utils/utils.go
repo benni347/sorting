@@ -2,8 +2,10 @@
 package utils
 
 import (
+	"math/rand"
 	"os"
 	"runtime"
+	"time"
 
 	log "github.com/sirupsen/logrus"
 )
@@ -51,4 +53,29 @@ func NewLogger() *log.Logger {
 // LogLevel Sets the log level for log
 func LogLevel(lvl string) (log.Level, error) {
 	return log.ParseLevel(lvl)
+}
+
+func logExecution(duration time.Duration, method string) {
+	Logger.WithFields(log.Fields{
+		"package":        "utils",
+		"Execution Time": duration,
+		"Sorter": method,
+	}).Info("Sorted")
+}
+
+const (
+	randomIntListLength = 10
+	upperBoundList      = randomIntListLength * 10
+)
+
+var randomIntList []int
+
+// RunAndLogPerformance runs the different algorithms
+func RunAndLogPerformance() {
+	for len(randomIntList) < randomIntListLength {
+		randomIntList = append(randomIntList, rand.Intn(upperBoundList))
+	}
+
+	startTime := time.Now()
+	timeDuration := time.Since(startTime)
 }
