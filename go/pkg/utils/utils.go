@@ -7,7 +7,6 @@ import (
 	"runtime"
 	"time"
 
-	"github.com/benni347/sorting/go/pkg/bogo"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -65,7 +64,7 @@ func logExecution(duration time.Duration, method string) {
 }
 
 const (
-	randomIntListLength = 10
+	randomIntListLength = 10000
 	upperBoundList      = randomIntListLength * 10
 )
 
@@ -77,8 +76,9 @@ func RunAndLogPerformance() {
 		randomIntList = append(randomIntList, rand.Intn(upperBoundList))
 	}
 
-	startTime := time.Now()
-	bogo.Bogo(randomIntList)
-	timeDuration := time.Since(startTime)
-	logExecution(timeDuration, "bogo")
+	// startTime := time.Now()
+	// bogo.Bogo(randomIntList)
+	// timeDuration := time.Since(startTime)
+	// logExecution(timeDuration, "bogo")
+
 }
